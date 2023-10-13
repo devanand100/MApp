@@ -12,6 +12,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -30,7 +31,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule ,
+    MatMenuModule
   ],
   exports: [
     MatSnackBarModule,
@@ -45,7 +47,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatProgressSpinnerModule,
     MatSelectModule ,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule ,
+    MatMenuModule
   ],
 })
 export class AngularMaterialModule { }

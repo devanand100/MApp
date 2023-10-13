@@ -1,1 +1,24 @@
-<p>login works!</p>
+<mat-card>
+    <form [formGroup]="login" (ngSubmit)="onSubmit()" >
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input  matInput type="email" formControlName = "email">
+            <mat-error *ngIf="login.get('email').hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="login.get('email').hasError('email')">Invalid email address</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password">
+            <mat-error *ngIf="login.get('password').hasError('required')">Password Required</mat-error>
+            <mat-error *ngIf="login.get('password').hasError('minlength')">Password should be minimum 8 character</mat-error>
+        </mat-form-field>
+       
+        <div class="login-account">
+            <button mat-raised-button type="submit" color="primary">Login</button>
+        </div>
+        
+    </form>
+    <div class="forgot-password"><a routerLink="auht/forgotPassword">forgot password? </a>
+        </div>
+</mat-card>

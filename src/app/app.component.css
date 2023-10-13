@@ -2,8 +2,20 @@ ul{
     list-style-type: none;
     display: flex;
     padding-left: 0;
+    justify-content: center;
+    line-height: 1;
+    align-items: center;
 }
-
 mat-drawer-container{
     height: calc(100vh - 64px);
+}
+/* .profile{
+    flex-grow: 1;
+} */
+a{
+    font-size:large
+}
+.profile img{
+    height: 34px;
+    width: 34px;
 }

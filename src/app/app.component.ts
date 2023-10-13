@@ -1,27 +1,41 @@
-import { Component  } from '@angular/core';
+import { Component , OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
-
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth/auth.service';
+import {map} from "rxjs/operators"
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
  
   title = 'hApp';
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer){
+  user = "";
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer , private _authService:AuthService){
     iconRegistry.addSvgIconLiteral('bar', sanitizer.bypassSecurityTrustHtml(BAR));
   }
+
+  ngOnInit(): void {
+    this.checkScreenSize();
+    this._authService.verifyUser();
+    this._authService.userListener().subscribe((userData)=>this.user = userData)
+  }
+
    isMobile = false; 
-   mobile = window.matchMedia("(max-width: 700px)").addEventListener('change', (e)=>{
-    if(e.matches){
-      this.isMobile = true
-    }else{
-      this.isMobile = false
-    }
-  })
+   checkScreenSize() {
+    const mobileQuery = window.matchMedia('(max-width: 700px)');
+    this.isMobile = mobileQuery.matches;
+    mobileQuery.addEventListener('change', (e) => {
+      this.isMobile = e.matches;
+    });
+  }
   
+  logOut(){
+    this._authService.logOut();
+  }
+  s
 }
 
 

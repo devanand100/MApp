@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule} from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterCeptor } from './auth/authInterceptor';
 
 @NgModule({
   declarations: [
@@ -16,9 +17,10 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
     AppRoutingModule,
     BrowserAnimationsModule ,
     AngularMaterialModule ,
-    ReactiveFormsModule
+    
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ {provide:HTTP_INTERCEPTORS , useClass:AuthInterCeptor  ,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

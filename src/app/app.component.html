@@ -1,16 +1,33 @@
 <mat-toolbar>
   <ul>
-      <li (click)="drawer.toggle()"><mat-icon svgIcon="bar" aria-hidden="false" aria-label="toggle bar"></mat-icon></li>
-      <li>One</li>
-      <li>Two</li>
+      <li (click)="drawer.toggle()" *ngIf="isMobile"><mat-icon svgIcon="bar" aria-hidden="false" aria-label="toggle bar"></mat-icon></li>
+      <li *ngIf="!user"><a routerLink="/auth/login" routerLinkActive="accent">Login</a></li>
+      <li *ngIf="!user"><a routerLink="/auth/register" routerLinkActive="accent">Registration</a></li>
+      <div *ngIf="user">
+      <li class="profile" [mat-menu-trigger-for]="profile" >
+        <img
+        [src]="user.image"
+        onerror="this.onerror=null; this.src= '../assets/default-profile.png'"
+      />
+      </li>
+      <mat-menu #profile="matMenu" >
+        <button mat-menu-item routerLink="/auth/profile/">
+          profile
+        </button>
+        <button mat-menu-item (click)="logOut()">
+          Logout
+        </button>
+       
+      </mat-menu>
+    </div>
   </ul>
   </mat-toolbar>
   <mat-drawer-container [hasBackdrop]="isMobile">
-    <mat-drawer #drawer [mode]="isMobile ? 'over' : 'side'">
-      <p>asdasd</p>
+    <mat-drawer #drawer [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile">
+     
     </mat-drawer>
     <mat-drawer-content>
-      <div>Drawer Content</div>
     <router-outlet></router-outlet>
     </mat-drawer-content>
   </mat-drawer-container>
+  

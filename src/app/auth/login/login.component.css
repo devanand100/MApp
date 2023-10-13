@@ -1,0 +1,12 @@
+mat-card{
+    max-width: 400px;
+    margin: 40px auto;
+    
+}
+.forgot-password{
+    margin-top: 10px;
+}
+.login-account{
+    display: flex;
+    justify-content: space-between;
+}
