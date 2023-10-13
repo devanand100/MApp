@@ -1,0 +1,9 @@
+ul{
+    list-style-type: none;
+    display: flex;
+    padding-left: 0;
+}
+
+mat-drawer-container{
+    height: calc(100vh - 64px);
+}

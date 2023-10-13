@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <ul>
+      <li (click)="drawer.toggle()"><mat-icon svgIcon="bar" aria-hidden="false" aria-label="toggle bar"></mat-icon></li>
+      <li>One</li>
+      <li>Two</li>
+  </ul>
+  </mat-toolbar>
+  <mat-drawer-container [hasBackdrop]="isMobile">
+    <mat-drawer #drawer [mode]="isMobile ? 'over' : 'side'">
+      <p>asdasd</p>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div>Drawer Content</div>
+    <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
