@@ -19,7 +19,7 @@ export class RegistrationComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router
   ) {}
-  
+
   ngOnInit(): void {
     if (this.router.url === '/auth/profile') {
       this.isItProfileUpdate = true;
@@ -27,8 +27,12 @@ export class RegistrationComponent implements OnInit {
         (data: any) => {
           this.registration.patchValue(data);
           this.registration.get('password').setValue('');
-          this.registration.get('password').clearValidators();
+          this.registration.get('password').setErrors(null);
           this.registration.updateValueAndValidity();
+          console.log(
+            'password validation oninit',
+            this.registration.get('password')
+          );
           if (data.image) {
             this.imageUrl = data.image;
           }
@@ -56,16 +60,25 @@ export class RegistrationComponent implements OnInit {
 
     if (this.isItProfileUpdate) {
       const updates: any = this.getUpdatedValues();
+
       if (typeof this.registration.value.image === 'object') {
         updates.image = this.registration.value.image;
       }
-      this._authService.updateProfile(updates).subscribe(()=>{
-        this._snackBar.open("profile updated Successfully", 'Okay', { duration: 3000 });
-      },(error)=>{
-        this._snackBar.open(error.error.message, 'Okay', { duration: 3000 });
-      })
+
+      this._authService.updateProfile(updates).subscribe(
+        () => {
+          this._snackBar.open('profile updated Successfully', 'Okay', {
+            duration: 3000,
+          });
+        },
+        (error) => {
+          this._snackBar.open(error.error.message, 'Okay', { duration: 3000 });
+        }
+      );
     } else {
-      this._authService.register(this.registration.value).subscribe(
+      const registerationData = this.registration.value;
+      delete registerationData.image;
+      this._authService.register(registerationData).subscribe(
         () => {
           this.router.navigate(['/auth/login']);
         },

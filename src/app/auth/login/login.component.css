@@ -1,12 +1,13 @@
-mat-card{
-    max-width: 400px;
-    margin: 40px auto;
-    
+mat-card {
+  max-width: 400px;
+  margin: 40px auto;
 }
-.forgot-password{
-    margin-top: 10px;
+.auth-links {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
-.login-account{
-    display: flex;
-    justify-content: space-between;
+.login-account {
+  display: flex;
+  justify-content: space-between;
 }

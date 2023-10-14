@@ -1,39 +1,61 @@
-<mat-card>
-    <p class="profile-title">Profile Picture</p>
+<mat-card *ngIf="isItProfileUpdate">
+  <p class="profile-title">Profile Picture</p>
 
-    <div class="image-field">
-        <img
-        [src]="imageUrl"
-        onerror="this.onerror=null; this.src= '../../assets/default-profile.png'" />
-    <div >
-        <button type="button" mat-stroked-button (click)="img.click()">Pick Image</button>
-        <input  hidden type="file" (change)="imageChange($event)" #img accept="image/*">
-       
-        <mat-error *ngIf="registration.get('image')?.touched && registration.get('image')?.errors?.inValiFormate">Please select a valid image file (e.g., JPEG, PNG).</mat-error>
+  <div class="image-field">
+    <img
+      [src]="imageUrl"
+      onerror="this.onerror=null; this.src= '../../assets/default-profile.png'"
+    />
+    <div>
+      <button type="button" mat-stroked-button (click)="img.click()">
+        Pick Image
+      </button>
+      <input
+        hidden
+        type="file"
+        (change)="imageChange($event)"
+        #img
+        accept="image/*"
+      />
+      <mat-error
+        *ngIf="
+          registration.get('image')?.touched &&
+          registration.get('image')?.errors?.inValiFormate
+        "
+        >Please select a valid image file (e.g., JPEG, PNG).</mat-error
+      >
     </div>
-</div>
+  </div>
 </mat-card>
-<mat-card >
-<form [formGroup]="registration" (ngSubmit)="onSubmit()">
+<mat-card>
+  <form [formGroup]="registration" (ngSubmit)="onSubmit()" novalidate>
     <mat-form-field>
       <mat-label>First Name</mat-label>
-      <input type="text" matInput formControlName="firstName">
-      <mat-error *ngIf="registration.get('firstName').hasError('required')">First name is required</mat-error>
+      <input type="text" matInput formControlName="firstName" />
+      <mat-error *ngIf="registration.get('firstName').hasError('required')"
+        >First name is required</mat-error
+      >
     </mat-form-field>
-  
+
     <mat-form-field>
       <mat-label>Last Name</mat-label>
-      <input type="text" matInput formControlName="lastName">
-      <mat-error *ngIf="registration.get('lastName').hasError('required')">Last name is required</mat-error>
+      <input type="text" matInput formControlName="lastName" />
+      <mat-error *ngIf="registration.get('lastName').hasError('required')"
+        >Last name is required</mat-error
+      >
     </mat-form-field>
-  
+
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email">
-      <mat-error *ngIf="registration.get('email').hasError('required')">Email is required</mat-error>
-      <mat-error *ngIf="registration.get('email').hasError('email')">Invalid email address</mat-error>
+      <input type="email" matInput formControlName="email" />
+      <mat-error *ngIf="registration.get('email').hasError('required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="registration.get('email').hasError('email')"
+        >Invalid email address</mat-error
+      >
     </mat-form-field>
-  
+
     <mat-form-field>
       <mat-label>Gender</mat-label>
       <mat-select formControlName="gender">
@@ -41,28 +63,36 @@
         <mat-option value="female">Female</mat-option>
         <mat-option value="other">Other</mat-option>
       </mat-select>
-      <mat-error *ngIf="registration.get('gender').hasError('required')">Gender is required</mat-error>
+      <mat-error *ngIf="registration.get('gender').hasError('required')"
+        >Gender is required</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Blood Group</mat-label>
-        <mat-select formControlName="bloodGroup">
-          <mat-option value="A+">A+</mat-option>
-          <mat-option value="A-">A-</mat-option>
-          <mat-option value="B+">B+</mat-option>
-          <mat-option value="B-">B-</mat-option>
-          <mat-option value="AB+">AB+</mat-option>
-          <mat-option value="AB-">AB-</mat-option>
-          <mat-option value="O+">O+</mat-option>
-          <mat-option value="O-">O-</mat-option>
-        </mat-select>
-      </mat-form-field>
-    <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password">
-        <mat-error *ngIf="registration.get('password').hasError('required')">Password Required</mat-error>
-        <mat-error *ngIf="registration.get('password').hasError('minlength')">Password should be minimum 8 character</mat-error>
+      <mat-label>Blood Group</mat-label>
+      <mat-select formControlName="bloodGroup">
+        <mat-option value="A+">A+</mat-option>
+        <mat-option value="A-">A-</mat-option>
+        <mat-option value="B+">B+</mat-option>
+        <mat-option value="B-">B-</mat-option>
+        <mat-option value="AB+">AB+</mat-option>
+        <mat-option value="AB-">AB-</mat-option>
+        <mat-option value="O+">O+</mat-option>
+        <mat-option value="O-">O-</mat-option>
+      </mat-select>
     </mat-form-field>
- 
-    <button mat-raised-button type="submit" color="primary">{{ isItProfileUpdate ?  "Save" :"Register" }}</button>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+      <mat-error *ngIf="registration.get('password').hasError('required')"
+        >Password Required</mat-error
+      >
+      <mat-error *ngIf="registration.get('password').hasError('minlength')"
+        >Password should be minimum 8 character</mat-error
+      >
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" color="primary">
+      {{ isItProfileUpdate ? "Save" : "Register" }}
+    </button>
   </form>
 </mat-card>
