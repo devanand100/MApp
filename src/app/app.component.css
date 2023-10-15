@@ -30,3 +30,13 @@ a {
   font-weight: 400;
   color: rgb(112, 109, 109);
 }
+.mat-menu-item .mat-icon {
+  margin-right: 8px;
+}
+mat-toolbar {
+  justify-content: space-between;
+}
+.brand-header {
+  display: flex;
+  align-items: center;
+}

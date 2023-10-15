@@ -1,32 +1,38 @@
 <mat-toolbar>
-  <ul>
-    <li (click)="drawer.toggle()" *ngIf="isMobile">
+  <div class="brand-header">
+    <p (click)="drawer.toggle()" *ngIf="isMobile">
       <mat-icon
         svgIcon="bar"
         aria-hidden="false"
         aria-label="toggle bar"
       ></mat-icon>
-    </li>
-    <li *ngIf="!user">
-      <a routerLink="/auth/login" routerLinkActive="accent">Login</a>
-    </li>
-    <li *ngIf="!user">
-      <a routerLink="/auth/register" routerLinkActive="accent">Registration</a>
-    </li>
+    </p>
+    <h1 routerLink="/">BRAND</h1>
+  </div>
+  <ul>
     <div *ngIf="user">
       <li class="profile" [mat-menu-trigger-for]="profile">
         <img
           [src]="user.image"
           onerror="this.onerror=null; this.src= '../assets/default-profile.png'"
         />
-        <p>{{ user.firstName }}</p>
       </li>
 
       <mat-menu #profile="matMenu">
-        <button mat-menu-item routerLink="/auth/profile/">profile</button>
-        <button mat-menu-item (click)="logOut()">Logout</button>
+        <button mat-menu-item routerLink="/auth/profile/">
+          <mat-icon>account_circle</mat-icon>
+          <span> profile </span>
+        </button>
+        <button mat-menu-item (click)="logOut()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span> Logout </span>
+        </button>
       </mat-menu>
     </div>
+
+    <li *ngIf="!user">
+      <button mat-button routerLink="/auth/login">Login/Register</button>
+    </li>
   </ul>
 </mat-toolbar>
 <mat-drawer-container [hasBackdrop]="isMobile">

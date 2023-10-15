@@ -8,19 +8,17 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterCeptor } from './auth/authInterceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule ,
-    AngularMaterialModule ,
-    
-    HttpClientModule
+    BrowserAnimationsModule,
+    AngularMaterialModule,
+    HttpClientModule,
   ],
-  providers: [ {provide:HTTP_INTERCEPTORS , useClass:AuthInterCeptor  ,multi:true}],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterCeptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

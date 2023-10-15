@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
   isItProfileUpdate: boolean = false;
   imageUrl: string | undefined;
-
+  isLoading = false;
   constructor(
     private fb: FormBuilder,
     private _authService: AuthService,
@@ -23,22 +23,23 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
     if (this.router.url === '/auth/profile') {
       this.isItProfileUpdate = true;
+      this.isLoading = true;
       this._authService.fetUserProfile().subscribe(
         (data: any) => {
+          this.isLoading = false;
           this.registration.patchValue(data);
           this.registration.get('password').setValue('');
-          this.registration.get('password').setErrors(null);
-          this.registration.updateValueAndValidity();
-          console.log(
-            'password validation oninit',
-            this.registration.get('password')
-          );
+          this.registration.get('password').setValidators(null);
+          this.registration.get('password').updateValueAndValidity();
+
           if (data.image) {
             this.imageUrl = data.image;
           }
         },
-        (error) =>
-          this._snackBar.open(error.error.message, 'Okay', { duration: 3000 })
+        (error) => {
+          this.isLoading = false;
+          this._snackBar.open(error.error.message, 'Okay', { duration: 3000 });
+        }
       );
     }
   }
@@ -57,7 +58,7 @@ export class RegistrationComponent implements OnInit {
     if (!this.registration.valid) {
       return;
     }
-
+    this.isLoading = true;
     if (this.isItProfileUpdate) {
       const updates: any = this.getUpdatedValues();
 
@@ -65,13 +66,27 @@ export class RegistrationComponent implements OnInit {
         updates.image = this.registration.value.image;
       }
 
+      if (updates?.password && updates.password.length < 8) {
+        this.registration
+          .get('password')
+          .setValidators([Validators.minLength(8)]);
+        this.registration.get('password').updateValueAndValidity();
+        return;
+      }
+
+      if (updates?.password === '' || Object.keys(updates).length === 0) {
+        return;
+      }
+
       this._authService.updateProfile(updates).subscribe(
         () => {
+          this.isLoading = false;
           this._snackBar.open('profile updated Successfully', 'Okay', {
             duration: 3000,
           });
         },
         (error) => {
+          this.isLoading = false;
           this._snackBar.open(error.error.message, 'Okay', { duration: 3000 });
         }
       );
@@ -83,6 +98,7 @@ export class RegistrationComponent implements OnInit {
           this.router.navigate(['/auth/login']);
         },
         (error) => {
+          this.isLoading = false;
           this._snackBar.open(error.error.message, 'Okay', { duration: 3000 });
         }
       );

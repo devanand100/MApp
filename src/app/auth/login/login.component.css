@@ -1,4 +1,4 @@
-mat-card {
+.login {
   max-width: 400px;
   margin: 40px auto;
 }
@@ -10,4 +10,10 @@ mat-card {
 .login-account {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  margin-left: -15px;
+}
+mat-card {
+  padding: 36px;
 }

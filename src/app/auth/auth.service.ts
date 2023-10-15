@@ -32,6 +32,7 @@ export class AuthService {
         this.saveAuthData(data.accessToken, this.userSubject.value);
       },
       (error) => {
+        this.userSubject.next('');
         this._snackbar.open(error.error.message, 'Okay', { duration: 3000 });
       }
     );
@@ -52,15 +53,18 @@ export class AuthService {
     this.http.get(this.url + 'me').subscribe(
       (data) => {},
       (error) => {
-        console.log(error);
         if (error.error.message == 'Expired token') {
           this._snackbar.open('session Expired ,please Login again', 'Okay', {
             duration: 3000,
           });
+          this.router.navigate(['/auth/login']);
+          this.logOut();
         }
-        console.log('navigation from verifyUser authService');
         this.router.navigate(['/auth/login']);
-        this.logOut();
+
+        // this._snackbar.open(error.error.message, 'Okay', {
+        //   duration: 3000,
+        // });
       }
     );
   }
