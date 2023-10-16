@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterCeptor } from './auth/authInterceptor';
+import { HomepageModule } from './pages/homepage/homepage.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { AuthInterCeptor } from './auth/authInterceptor';
     BrowserAnimationsModule,
     AngularMaterialModule,
     HttpClientModule,
+    HomepageModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterCeptor, multi: true },

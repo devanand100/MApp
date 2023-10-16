@@ -7,9 +7,13 @@
         aria-label="toggle bar"
       ></mat-icon>
     </p>
-    <h1 routerLink="/">BRAND</h1>
+    <h1 routerLink="/">LOGO</h1>
+    
   </div>
   <ul>
+    <li *ngIf="!user" >
+      <a routerLink="/abha/card" mat-button>AbhaCard</a>
+    </li>
     <div *ngIf="user">
       <li class="profile" [mat-menu-trigger-for]="profile">
         <img
@@ -28,6 +32,7 @@
           <span> Logout </span>
         </button>
       </mat-menu>
+
     </div>
 
     <li *ngIf="!user">
@@ -40,5 +45,6 @@
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
+
   </mat-drawer-content>
 </mat-drawer-container>

@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
           this.registration.get('password').setValue('');
           this.registration.get('password').setValidators(null);
           this.registration.get('password').updateValueAndValidity();
-
+          
           if (data.image) {
             this.imageUrl = data.image;
           }
@@ -84,6 +84,7 @@ export class RegistrationComponent implements OnInit {
           this._snackBar.open('profile updated Successfully', 'Okay', {
             duration: 3000,
           });
+          this._authService.verifyUser();
         },
         (error) => {
           this.isLoading = false;

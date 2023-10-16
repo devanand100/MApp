@@ -1,0 +1,32 @@
+<mat-card>
+    <form [formGroup]="consultForm" (ngSubmit)="onSubmit()">
+        <h2>Consult with a Doctor</h2>
+        <mat-form-field *ngIf="specialities">
+            <mat-label>Doctor Specialty</mat-label>
+            <mat-select formControlName="speciality" (selectionChange)="fetchDoctor($event)"  >
+              <mat-option *ngFor="let speciality of specialities" [value]="speciality">{{speciality}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="consultForm.get('speciality').hasError('required')"
+              >Select Doctor specialty</mat-error
+            >
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Your Symptoms</mat-label>
+            <input type="text" matInput formControlName="symptoms" />
+          <mat-error *ngIf="consultForm.get('symptoms').hasError('required')"
+            >Tell us your Symptoms</mat-error
+          >
+            
+        </mat-form-field>
+        <mat-form-field *ngIf="doctors.length > 0">
+            <mat-label>Select Doctor</mat-label>
+            <mat-select formControlName="doctor" >
+              <mat-option *ngFor="let doctor of doctors" [value]="doctor._id">{{doctor.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="consultForm.get('doctor').hasError('required')"
+              >Select Doctor</mat-error
+            >
+          </mat-form-field>
+          <button mat-raised-button color="primary">Consult Now</button>
+    </form>
+</mat-card>

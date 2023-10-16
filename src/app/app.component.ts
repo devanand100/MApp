@@ -3,7 +3,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
-import {map} from "rxjs/operators"
+import { AbhaCardService } from './pages/abha-card.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,8 +13,9 @@ import {map} from "rxjs/operators"
 export class AppComponent implements OnInit {
  
   title = 'hApp';
-  user = "";
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer , private _authService:AuthService){
+  user:any = "";
+  consultionsCount = 0 ;
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer , private _authService:AuthService  , private _abhaService:AbhaCardService){
     iconRegistry.addSvgIconLiteral('bar', sanitizer.bypassSecurityTrustHtml(BAR));
   }
 
@@ -21,6 +23,8 @@ export class AppComponent implements OnInit {
     this.checkScreenSize();
     this._authService.verifyUser();
     this._authService.userListener().subscribe((userData)=>this.user = userData)
+    this._abhaService.setConsultionCount()
+    this._abhaService.ConsultionsSubjectListner().subscribe((countData)=>{this.consultionsCount = countData ; console.log(countData)})
   }
 
    isMobile = false; 
@@ -35,7 +39,9 @@ export class AppComponent implements OnInit {
   logOut(){
     this._authService.logOut();
   }
-  s
+  onOtpChange(event:any){
+    console.log(event)
+  }
 }
 
 

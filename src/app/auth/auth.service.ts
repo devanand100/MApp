@@ -13,8 +13,8 @@ export class AuthService {
     private _snackbar: MatSnackBar,
     private router: Router
   ) {}
-  // url = "http://desktop-7miu1qs:1400/v1/auth/"
-  url = 'http://devanand-HP-Pavilion-Notebook:1400/v1/auth/';
+  url = "http://desktop-7miu1qs:1400/v1/auth/"
+  // url = 'http://devanand-HP-Pavilion-Notebook:1400/v1/auth/';
   localUser = localStorage.getItem('user');
   userSubject = new BehaviorSubject(
     this.localUser ? JSON.parse(this.localUser) : ''
@@ -27,9 +27,10 @@ export class AuthService {
   logIn(data) {
     this.http.post(this.url + 'login', data).subscribe(
       (data: any) => {
-        console;
+        
         this.userSubject.next(data.user);
         this.saveAuthData(data.accessToken, this.userSubject.value);
+        this.router.navigate(['/consult'])
       },
       (error) => {
         this.userSubject.next('');
@@ -51,7 +52,10 @@ export class AuthService {
 
   verifyUser() {
     this.http.get(this.url + 'me').subscribe(
-      (data) => {},
+      (data) => {
+      
+        this.userSubject.next(data);
+      },
       (error) => {
         if (error.error.message == 'Expired token') {
           this._snackbar.open('session Expired ,please Login again', 'Okay', {
@@ -60,7 +64,7 @@ export class AuthService {
           this.router.navigate(['/auth/login']);
           this.logOut();
         }
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['']);
 
         // this._snackbar.open(error.error.message, 'Okay', {
         //   duration: 3000,
@@ -70,7 +74,7 @@ export class AuthService {
   }
 
   logOut() {
-    console.log('User logout');
+    
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['/']);

@@ -13,10 +13,9 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       return  this._authService.userListener().pipe(map((user)=>{
         if(user && Object.keys(user).length > 0){
-          console.log("user")
           return true
         }else {
-          console.log("user false")
+        
           return false
         }
        }))

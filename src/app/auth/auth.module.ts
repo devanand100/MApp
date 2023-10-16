@@ -6,13 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AuthRouting } from './auth.routing';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileComponent } from './profile/profile.component';
 import { OverlayComponent } from './overlay/overlay.component';
 @NgModule({
   declarations: [
     LoginComponent,
     RegistrationComponent,
-    ProfileComponent,
     OverlayComponent,
   ],
   imports: [

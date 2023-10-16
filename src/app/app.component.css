@@ -1,6 +1,10 @@
+mat-drawer-content{
+  background-color: #e7e7e7;
+}
 ul {
   list-style-type: none;
   display: flex;
+  gap: 15px;
   padding-left: 0;
   justify-content: center;
   line-height: 1;
