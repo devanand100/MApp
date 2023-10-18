@@ -17,3 +17,6 @@
 mat-card {
   padding: 36px;
 }
+a{
+  color: var(--primary);
+}

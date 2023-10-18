@@ -1,0 +1,29 @@
+.otp-form{
+    max-width: 400px;
+    margin: 30px auto;
+}
+mat-card{
+    padding: 30px;
+}
+
+.otp-header{
+    display: flex;
+    align-items: center;
+}
+h2{
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+mat-icon{
+    margin-left: -3px;
+    cursor: pointer;
+}
+.resend-link{
+    cursor: pointer;
+}
+.resend-link{
+    color: var(--primary);
+}
+.time-left{
+    color: var(--primary);
+}

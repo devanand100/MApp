@@ -1,0 +1,27 @@
+<div class="otp-form">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <div class="relative">
+        <app-overlay *ngIf="isLoading"></app-overlay>
+        <mat-card>
+            <div class="otp-header" >
+                <mat-icon (click)="back()">arrow_back</mat-icon>
+                <h2>Verify Your Email</h2>
+            </div>
+            <p>Check your inbox for a verification code sent to:</p>
+            <p class="user-email">{{userEmail}}</p>
+            <p class="instruction">Enter the 4-digit code to confirm your email:</p>
+            <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+                <mat-form-field>
+                    <mat-label>Verification Code</mat-label>
+                    <input matInput type="number" formControlName="pin" />
+                    <mat-error *ngIf="otpForm.get('pin').hasError('required')">Verification code is required</mat-error>
+                </mat-form-field>
+                <button mat-raised-button type="submit" color="primary">Verify</button>
+            </form>
+            <p class="resend-instruction">
+                Didn't receive a code? Wait for <span class="time-left">{{timeLeft | secondsToMinute}} </span>  seconds and
+                <a class="resend-link" (click)="resendCode()">Resend Code</a>
+            </p>
+        </mat-card>
+    </div>
+</div>

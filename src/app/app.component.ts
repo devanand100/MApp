@@ -1,7 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { AbhaCardService } from './pages/abha-card.service';
 
@@ -15,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'hApp';
   user:any = "";
   consultionsCount = 0 ;
+  isDarkTheme = false ; 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer , private _authService:AuthService  , private _abhaService:AbhaCardService){
     iconRegistry.addSvgIconLiteral('bar', sanitizer.bypassSecurityTrustHtml(BAR));
   }
@@ -23,8 +23,7 @@ export class AppComponent implements OnInit {
     this.checkScreenSize();
     this._authService.verifyUser();
     this._authService.userListener().subscribe((userData)=>this.user = userData)
-    this._abhaService.setConsultionCount()
-    this._abhaService.ConsultionsSubjectListner().subscribe((countData)=>{this.consultionsCount = countData ; console.log(countData)})
+
   }
 
    isMobile = false; 
@@ -41,6 +40,13 @@ export class AppComponent implements OnInit {
   }
   onOtpChange(event:any){
     console.log(event)
+  }
+  setTheme(event:any){
+    if(event.checked){
+      this.isDarkTheme = true
+    }else{
+      this.isDarkTheme = false;
+    }
   }
 }
 

@@ -1,1 +1,18 @@
-<p>abha-card works!</p>
+<mat-card>
+    <div>
+        <div class="abha-header">
+            Abha Card
+        </div>
+        <div class="abha-body">
+            <img
+          [src]="user?.image"
+          onerror="this.onerror=null; this.src= '../../../../assets/default-profile.png'"
+        />
+        <div>
+            <p>{{user.firstName + " " + user.lastName}}</p>
+            <p>{{user.gender}}</p>
+            <p>{{card.number}}</p>
+        </div>
+        </div>
+    </div>
+</mat-card>

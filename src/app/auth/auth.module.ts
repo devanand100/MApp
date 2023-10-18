@@ -6,12 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AuthRouting } from './auth.routing';
 import { HttpClientModule } from '@angular/common/http';
-import { OverlayComponent } from './overlay/overlay.component';
 @NgModule({
   declarations: [
     LoginComponent,
     RegistrationComponent,
-    OverlayComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +18,6 @@ import { OverlayComponent } from './overlay/overlay.component';
     AuthRouting,
     HttpClientModule,
   ],
-  exports: [OverlayComponent],
+  exports: [],
 })
 export class AuthModule {}

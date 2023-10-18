@@ -13,11 +13,12 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
-
+import { OverlayComponent } from './overlay/overlay.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [OverlayComponent],
   imports: [
     CommonModule,
     MatSnackBarModule,
@@ -32,7 +33,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSelectModule,
     MatSidenavModule,
     MatIconModule ,
-    MatMenuModule
+    MatMenuModule ,
+    MatSlideToggleModule
   ],
   exports: [
     MatSnackBarModule,
@@ -48,7 +50,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSelectModule ,
     MatSidenavModule,
     MatIconModule ,
-    MatMenuModule
+    MatMenuModule,
+    OverlayComponent,
+    MatSlideToggleModule
   ],
 })
 export class AngularMaterialModule { }

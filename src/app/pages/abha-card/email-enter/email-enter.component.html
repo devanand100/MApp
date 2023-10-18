@@ -1,0 +1,31 @@
+<div class="email-form">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <div class="relative">
+      <mat-card>
+        <h2 class="mb-0" *ngIf="!isLoading">Sign in with email </h2>
+        <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="!isLoading">
+                <mat-form-field  >
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" />
+                    <mat-error *ngIf="emailForm.get('email').hasError('required')"
+                      >Email is required</mat-error
+                    >
+                    <mat-error *ngIf="emailForm.get('email').hasError('email')"
+                      >Invalid email address</mat-error
+                    >
+                   
+                  </mat-form-field>
+            </div>
+         
+            <div *ngIf="isLoading">
+               <p> <span class="mail-check">Please Check your email</span> {{emailForm.get('email').value}} </p>
+               
+            </div>
+          
+            <button   *ngIf="!isLoading" mat-raised-button type="submit" color="primary">Next</button>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+  

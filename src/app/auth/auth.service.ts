@@ -64,7 +64,7 @@ export class AuthService {
           this.router.navigate(['/auth/login']);
           this.logOut();
         }
-        this.router.navigate(['']);
+        // this.router.navigate(['']);
 
         // this._snackbar.open(error.error.message, 'Okay', {
         //   duration: 3000,
