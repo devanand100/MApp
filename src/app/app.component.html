@@ -1,13 +1,13 @@
 <div [class.dark-theme]="isDarkTheme">
   <mat-toolbar color="primary">
     <div class="brand-header">
-      <p (click)="drawer.toggle()" *ngIf="isMobile">
+      <div (click)="drawer.toggle()" *ngIf="isMobile">
         <mat-icon
           svgIcon="bar"
           aria-hidden="false"
           aria-label="toggle bar"
         ></mat-icon>
-      </p>
+      </div>
       <h1 routerLink="/">LOGO</h1>
     </div>
     <ul>
@@ -48,7 +48,7 @@
         >
       </li>
       <li>
-        <mat-slide-toggle (change)="setTheme($event)"> <mat-icon>{{ isDarkTheme ? 'wb_sunny' : 'brightness_3' }}</mat-icon></mat-slide-toggle>
+         <mat-icon (click)="setTheme()">{{ isDarkTheme ? 'wb_sunny' : 'brightness_3' }}</mat-icon>
       </li>
      
     </ul>

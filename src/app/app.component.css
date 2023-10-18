@@ -39,6 +39,7 @@ a {
 }
 mat-toolbar {
   justify-content: space-between;
+  line-height: 1;
 }
 .brand-header {
   display: flex;

@@ -41,13 +41,12 @@ export class AppComponent implements OnInit {
   onOtpChange(event:any){
     console.log(event)
   }
-  setTheme(event:any){
-    if(event.checked){
-      this.isDarkTheme = true
-    }else{
-      this.isDarkTheme = false;
+  setTheme(){
+    
+      this.isDarkTheme = !this.isDarkTheme;
+    
     }
-  }
+  
 }
 
 
